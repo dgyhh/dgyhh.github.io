@@ -151,6 +151,76 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-nginx代理访问mysql数据库" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/03/nginx%E4%BB%A3%E7%90%86%E8%AE%BF%E9%97%AEmysql%E6%95%B0%E6%8D%AE%E5%BA%93/">nginx代理访问mysql数据库</a>
+    </h1>
+  
+
+        
+        <a href="/2019/12/03/nginx%E4%BB%A3%E7%90%86%E8%AE%BF%E9%97%AEmysql%E6%95%B0%E6%8D%AE%E5%BA%93/" class="archive-article-date">
+  	<time datetime="2019-12-03T03:10:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>情景：mysql生产环境数据库理论上是不允许在本地登陆的，但是包括dev和产品在内，依然有在本地连接数据库查数据的需求，现在通过nginx代理的方式来实现<br>具体：</p>
+<ol>
+<li>准备一台能连接数据库的EC2机器（通常是内网机器，ihandy这边使用的生产环境日志机器）</li>
+<li>EC2上配置nginx。<br>配置示例：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#x2F;etc&#x2F;nginx&#x2F;nginx.conf</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">stream &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    server &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">       listen 3108;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">       proxy_connect_timeout 10s;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">       proxy_timeout 3600s;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">       proxy_pass ohippo-pegasus-cluster.cluster-ro-ctpy0baxezll.us-east-1.rds.amazonaws.com:3306;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    server &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">       listen 3109;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">       proxy_connect_timeout 10s;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">       proxy_timeout 3600s;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">       proxy_pass ohippo-pegasus-cluster.cluster-ctpy0baxezll.us-east-1.rds.amazonaws.com:3306;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+上图示例是配置了一个只读节点，一个读写节点。</li>
+<li>本地通过代理连接数据库<br>连接示例：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">生产环境ohippo数据库（在线数据库）</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">mysql -h 18.207.99.245 --port 3106 -u &lt;user_name&gt; -p ohippo</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">key: &lt;passwd&gt;</span></pre></td></tr></table></figure>
+其中，18.207.99.245是代理EC2的公网IP。</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/03/nginx%E4%BB%A3%E7%90%86%E8%AE%BF%E9%97%AEmysql%E6%95%B0%E6%8D%AE%E5%BA%93/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-群晖NAS使用说明" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
