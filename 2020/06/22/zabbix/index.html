@@ -81,14 +81,18 @@
 
 
 
-<meta name="description" content="记录学习点滴">
-<meta property="og:type" content="website">
-<meta property="og:title" content="GuangYu Home">
-<meta property="og:url" content="https:&#x2F;&#x2F;blog.smartduck.xyz&#x2F;index.html">
+<meta name="description" content="监控系统设计目标： 监控系统稳定可靠，资源占用较少 监控系统可扩展性好，方便业务规模扩大的升级 拥有完整的Web交互界面，数据可视化良好，且可实现Web端配置 监控项及被监控主机的配置可批量化更新（监控项及主机数量庞大） 增加&#x2F;删除被监控主机，可实现自动发现自动更新 自动报警，如邮件，微信等方式 被监控主机出非硬件故障可远程进行有限操作，如重启，重装系统等 监控数据标准化存储，方便后期的二次开发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="zabbix">
+<meta property="og:url" content="https:&#x2F;&#x2F;blog.smartduck.xyz&#x2F;2020&#x2F;06&#x2F;22&#x2F;zabbix&#x2F;index.html">
 <meta property="og:site_name" content="GuangYu Home">
-<meta property="og:description" content="记录学习点滴">
+<meta property="og:description" content="监控系统设计目标： 监控系统稳定可靠，资源占用较少 监控系统可扩展性好，方便业务规模扩大的升级 拥有完整的Web交互界面，数据可视化良好，且可实现Web端配置 监控项及被监控主机的配置可批量化更新（监控项及主机数量庞大） 增加&#x2F;删除被监控主机，可实现自动发现自动更新 自动报警，如邮件，微信等方式 被监控主机出非硬件故障可远程进行有限操作，如重启，重装系统等 监控数据标准化存储，方便后期的二次开发">
 <meta property="og:locale" content="en">
+<meta property="og:image" content="https:&#x2F;&#x2F;blog.smartduck.xyz&#x2F;2020&#x2F;06&#x2F;22&#x2F;zabbix&#x2F;zabbix_arch.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;blog.smartduck.xyz&#x2F;Users&#x2F;guangyu.dong&#x2F;Downloads&#x2F;zabbix_arch.jpg">
+<meta property="og:updated_time" content="2020-06-22T06:03:43.210Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;blog.smartduck.xyz&#x2F;2020&#x2F;06&#x2F;22&#x2F;zabbix&#x2F;zabbix_arch.jpg">
 
 
 
@@ -118,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="https://blog.smartduck.xyz/"/>
+  <link rel="canonical" href="https://blog.smartduck.xyz/2020/06/22/zabbix/"/>
 
 
 
 
 
-  <title>GuangYu Home</title>
+  <title>zabbix | GuangYu Home</title>
   
 
 
@@ -143,8 +147,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -247,9 +250,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -279,9 +282,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/06/22/zabbix/" itemprop="url">zabbix</a></h1>
+          <h1 class="post-title" itemprop="name headline">zabbix</h1>
         
 
         <div class="post-meta">
@@ -331,9 +332,7 @@
       
 
       
-        
-          
-            <h3 id="监控系统设计目标："><a href="#监控系统设计目标：" class="headerlink" title="监控系统设计目标："></a>监控系统设计目标：</h3><ol>
+        <h3 id="监控系统设计目标："><a href="#监控系统设计目标：" class="headerlink" title="监控系统设计目标："></a>监控系统设计目标：</h3><ol>
 <li>监控系统稳定可靠，资源占用较少</li>
 <li>监控系统可扩展性好，方便业务规模扩大的升级</li>
 <li>拥有完整的Web交互界面，数据可视化良好，且可实现Web端配置</li>
@@ -431,8 +430,6 @@
 <h3 id="BMC"><a href="#BMC" class="headerlink" title="BMC"></a>BMC</h3><p>介绍BMC之前先介绍一个概念：IPMI （Intelligent platform management interface）<br>即智能平台管理接口<br>平台管理表示的是一系列监视和控制功能，操作的对象是系统硬件。比如监视硬件的温度，电压，风扇等信息，并作出相应的调节工作，保证系统处于健康状态。必要的时候可通过复位重启系统。<br>同时平台还负责记录各种硬件的信息和日志记录</p>
 <p>以上的功能可以集成到一个控制器上来实现，这个控制器称为基板管理控制器（BMC）。<br>BMC是一个独立的系统，不依赖于系统上的其他硬件，可以理解为是一个嵌入式系统。嵌入的是一个类unix系统。</p>
 
-          
-        
       
     </div>
     
@@ -449,161 +446,28 @@
       
 
       
-
-      
-
       
       
-        <div class="post-eof"></div>
+
       
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.smartduck.xyz/2019/12/03/nginx%E4%BB%A3%E7%90%86%E8%AE%BF%E9%97%AEmysql%E6%95%B0%E6%8D%AE%E5%BA%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="GuangYu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="GuangYu Home">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/12/03/nginx%E4%BB%A3%E7%90%86%E8%AE%BF%E9%97%AEmysql%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url">nginx代理访问mysql数据库</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-12-03T11:10:33+08:00">
-                2019-12-03
-              </time>
+              <a href="/2019/12/03/nginx%E4%BB%A3%E7%90%86%E8%AE%BF%E9%97%AEmysql%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="next" title="nginx代理访问mysql数据库">
+                <i class="fa fa-chevron-left"></i> nginx代理访问mysql数据库
+              </a>
             
+          </div>
 
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%BF%90%E7%BB%B4/" itemprop="url" rel="index">
-                    <span itemprop="name">运维</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <p>情景：mysql生产环境数据库理论上是不允许在本地登陆的，但是包括dev和产品在内，依然有在本地连接数据库查数据的需求，现在通过nginx代理的方式来实现<br>具体：</p>
-<ol>
-<li>准备一台能连接数据库的EC2机器（通常是内网机器，ihandy这边使用的生产环境日志机器）</li>
-<li>EC2上配置nginx。<br>配置示例：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#x2F;etc&#x2F;nginx&#x2F;nginx.conf</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">stream &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    server &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">       listen 3108;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">       proxy_connect_timeout 10s;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">       proxy_timeout 3600s;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">       proxy_pass ohippo-pegasus-cluster.cluster-ro-ctpy0baxezll.us-east-1.rds.amazonaws.com:3306;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    server &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">       listen 3109;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">       proxy_connect_timeout 10s;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">       proxy_timeout 3600s;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">       proxy_pass ohippo-pegasus-cluster.cluster-ctpy0baxezll.us-east-1.rds.amazonaws.com:3306;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-上图示例是配置了一个只读节点，一个读写节点。</li>
-<li>本地通过代理连接数据库<br>连接示例：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">生产环境ohippo数据库（在线数据库）</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">mysql -h 18.207.99.245 --port 3106 -u &lt;user_name&gt; -p ohippo</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">key: &lt;passwd&gt;</span></pre></td></tr></table></figure>
-其中，18.207.99.245是代理EC2的公网IP。</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -613,281 +477,11 @@
   </article>
 
 
-    
-      
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.smartduck.xyz/2019/12/03/%E7%BE%A4%E6%99%96NAS%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="GuangYu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="GuangYu Home">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/12/03/%E7%BE%A4%E6%99%96NAS%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/" itemprop="url">群晖NAS使用说明</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-12-03T10:59:18+08:00">
-                2019-12-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="群晖NAS配置总结"><a href="#群晖NAS配置总结" class="headerlink" title="群晖NAS配置总结"></a>群晖NAS配置总结</h2><p>群晖NAS是一款网络连接存储服务器，可以在内网使用，也可以通过配置路由表在外网访问。</p>
-<p>参考用户手册：<a href="https://global.download.synology.com/download/Document/Software/UserGuide/Firmware/DSM/6.2/chs/Syno_UsersGuide_NAServer_chs.pdf" target="_blank" rel="noopener">https://global.download.synology.com/download/Document/Software/UserGuide/Firmware/DSM/6.2/chs/Syno_UsersGuide_NAServer_chs.pdf</a></p>
-<h3 id="登陆NAS"><a href="#登陆NAS" class="headerlink" title="登陆NAS"></a>登陆NAS</h3><ol>
-<li>配置安装操作系统<ul>
-<li>手机端安装 参考说明书</li>
-<li>pc端安装  <a href="http://find.synology.com/" target="_blank" rel="noopener">http://find.synology.com/</a></li>
-</ul>
-</li>
-<li>初始化，两块硬盘的话选择raid1方式（安全），具体raid方式的区别可参考用户手册</li>
-</ol>
-<h3 id="创建用户和用户组"><a href="#创建用户和用户组" class="headerlink" title="创建用户和用户组"></a>创建用户和用户组</h3><ol>
-<li>创建用户组</li>
-<li>批量创建用户 （可在excel中生成然后copy到txt中）</li>
-<li>配置用户和用户组的权限  （如果一个用户属于两个组，则该用户的权限是两个组的交集，即为最小权限，为了保证安全）</li>
-<li>导入用户的时候可配置邮件通知，需要事先在通知设置上配置邮箱。这样可以通过邮件的方式将用户名和密码发送给用户。注意微软邮箱一次只能发送5个邮箱，需要再配置，还没搞定</li>
-</ol>
-<h3 id="网络配置"><a href="#网络配置" class="headerlink" title="网络配置"></a>网络配置</h3><ol>
-<li>固定IP  取消DHCP即可</li>
-<li>可以在路由器上配置路由表，确定新的转发规则</li>
-</ol>
-
-          
-        
+    <div class="post-spread">
       
     </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.smartduck.xyz/2019/12/02/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="GuangYu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="GuangYu Home">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/12/02/hello-world/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-12-02T17:55:42+08:00">
-                2019-12-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ hexo server</span></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ hexo generate</span></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-  </section>
-
-  
 
 
           </div>
@@ -895,6 +489,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -915,8 +513,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -976,6 +583,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#监控系统设计目标："><span class="nav-number">1.</span> <span class="nav-text">监控系统设计目标：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Zabbix"><span class="nav-number">2.</span> <span class="nav-text">Zabbix</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Zabbix介绍"><span class="nav-number">2.1.</span> <span class="nav-text">Zabbix介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Zabbix的特点"><span class="nav-number">2.2.</span> <span class="nav-text">Zabbix的特点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Zabbix体系结构："><span class="nav-number">2.3.</span> <span class="nav-text">Zabbix体系结构：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Zabbix的监控范围及方式"><span class="nav-number">2.4.</span> <span class="nav-text">Zabbix的监控范围及方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常见术语"><span class="nav-number">2.5.</span> <span class="nav-text">常见术语</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#模版"><span class="nav-number">2.6.</span> <span class="nav-text">模版</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ubuntu18-04安装脚本"><span class="nav-number">3.</span> <span class="nav-text">ubuntu18.04安装脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BMC"><span class="nav-number">4.</span> <span class="nav-text">BMC</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -1109,6 +732,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
